@@ -1,5 +1,4 @@
 function solveEquation(a, b, c) {
-  "use strict";   // код для задачи №1 писать здесь
 
   let arr = [];
   let x;
