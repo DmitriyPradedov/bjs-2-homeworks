@@ -1,23 +1,23 @@
 function solveEquation(a, b, c) {
-
+  "use strict"; 
+  
   let arr = [];
-  let x;
-  let D = b**2 - 4 * a * c;
-  if (D === 0) {
-    x = -b / (2 * a);
-    arr.push(x);
+  let d = b**2-4*a*c;
+  if (d > 0) {
+    let x1 = (-b + Math.sqrt(d))/(2*a);
+    let x2 = (-b - Math.sqrt(d))/(2*a);
+    arr.push(x1, x2);
+  } else if (d == 0) {
+      let x1 = -b/(2*a);
+      arr.push(x1);
   }
-  else if (D > 0) {
-    x = (-b + Math.sqrt(D)) / (2 * a);
-    arr.push(x);
-    x = (-b - Math.sqrt(D)) / (2 * a);
-    arr.push(x);
-  }
-  return arr; // array
+  console.log(arr);
+  return arr;
 }
 
+
 function calculateTotalMortgage(percent, contribution, amount, date) {
-  "use strict";   // код для задачи №2 писать здесь
+  "use strict";  
   if ((checkNumber('процент', percent) === true) && (checkNumber('первый взнос', contribution) === true) && (checkNumber('сумма', amount) === true)) {  
     let today = new Date();
     let countMonth = (date.getFullYear() - today.getFullYear()) * 12 + (date.getMonth() - today.getMonth());
