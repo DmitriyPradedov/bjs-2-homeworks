@@ -17,16 +17,28 @@ function solveEquation(a, b, c) {
 
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
-  "use strict";  
-  if ((checkNumber('процент', percent) === true) && (checkNumber('первый взнос', contribution) === true) && (checkNumber('сумма', amount) === true)) {  
-    let today = new Date();
-    let countMonth = (date.getFullYear() - today.getFullYear()) * 12 + (date.getMonth() - today.getMonth());
-    let P = (percent / 12) / 100;
-    let S = amount - contribution;
-    let totalAmount = (countMonth * (S * ( P + P / ((( 1 + P ) ** countMonth) - 1 )))).toFixed(2);
-  
-    console.log(totalAmount);
+  let totalAmount;
 
-    return Number(totalAmount);
-  }  
+  if (isNaN(percent)) {
+    return (`Параметр "Процентная ставка" содержит неправильное значение "${percent}"`);  
+  }
+
+  if (isNaN(contribution)) {
+    return (`Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`);  
+  }
+
+  if (isNaN(amount)) {
+    return (`Параметр "Общая стоимость" содержит неправильное значение "${amount}"`);  
+  }
+
+  let creditAmount = amount - contribution;
+  let today = new Date(); 
+  let months = ((date.getMonth() - today.getMonth()) + ((date.getFullYear() - today.getFullYear()) * 12));
+  let rate = percent / 12 / 100; //1/12 процентной ставки
+  let monthly = creditAmount * (rate + (rate / (((1 + rate) ** months) - 1))); //расчет ежемесячной оплаты
+  totalAmount = +(monthly * months).toFixed(2); 
+  
+  console.log(totalAmount);
+
+  return totalAmount;
 }
