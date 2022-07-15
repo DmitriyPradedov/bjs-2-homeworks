@@ -44,5 +44,5 @@ function makeWork(arrOfArr, func) {
 
 // Задание 3
 function worker2(arr) {
-  return getArrayParams(arr).max - getArrayParams(arr).min;
+  return  Math.abs(Math.max(...arr) - Math.min(...arr));
 }
