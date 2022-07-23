@@ -71,12 +71,12 @@ class Book extends PrintEditionItem {
   }
  }
 
-const sherlock = new PrintEditionItem("Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008);
+const sherlock1 = new PrintEditionItem("Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008);
 
-console.log(sherlock.releaseDate); 
-console.log(sherlock.state); 
-sherlock.fix();
-console.log(sherlock.state);
+console.log(sherlock1.releaseDate); 
+console.log(sherlock1.state); 
+sherlock1.fix();
+console.log(sherlock1.state);
 
 
 // Задача №2. Библиотека
@@ -127,30 +127,29 @@ class Library {
       return null;
     }
 
-
   }
 }
-const library = new Library("Библиотека имени Ленина");
+const library1 = new Library("Библиотека имени Ленина");
 
-library.addBook(new DetectiveBook("Артур Конан Дойл", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008));
-library.addBook(new FantasticBook("Аркадий и Борис Стругацкие", "Пикник на обочине", 1972, 168));
-library.addBook(new NovelBook("Герберт Уэллс", "Машина времени", 1895, 138));
-library.addBook(new Magazine("Мурзилка", 1924, 60));
-library.addBook(new Magazine("Смешарики", 1980, 30));
+library1.addBook(new DetectiveBook("Артур Конан Дойл", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008));
+library1.addBook(new FantasticBook("Аркадий и Борис Стругацкие", "Пикник на обочине", 1972, 168));
+library1.addBook(new NovelBook("Герберт Уэллс", "Машина времени", 1895, 138));
+library1.addBook(new Magazine("Мурзилка", 1924, 60));
+library1.addBook(new Magazine("Смешарики", 1980, 30));
 
-console.log(library.findBookBy("name", "Властелин колец")); 
-console.log(library.findBookBy("name", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе")); 
-console.log(library.findBookBy("releaseDate", 1924)); 
+console.log(library1.findBookBy("name", "Властелин колец")); 
+console.log(library1.findBookBy("name", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе")); 
+console.log(library1.findBookBy("releaseDate", 1924)); 
 
-library.addBook(new NovelBook(" Стефан Цвейг", "Случай на Женевском озере", 1919, 120, 80));
-console.log(library.findBookBy("releaseDate", 1919)); 
-console.log(library.findBookBy("releaseDate", 1919).state); 
-library.findBookBy("releaseDate", 1919).fix();
-console.log(library.findBookBy("releaseDate", 1919).state); 
+library1.addBook(new NovelBook(" Стефан Цвейг", "Случай на Женевском озере", 1919, 120, 80));
+console.log(library1.findBookBy("releaseDate", 1919)); 
+console.log(library1.findBookBy("releaseDate", 1919).state); 
+library1.findBookBy("releaseDate", 1919).fix();
+console.log(library1.findBookBy("releaseDate", 1919).state); 
 
-console.log("Количество книг до выдачи: " + library.books.length); 
-library.giveBookByName("Машина времени");
-console.log("Количество книг после выдачи: " + library.books.length); 
+console.log("Количество книг до выдачи: " + library1.books.length); 
+library1.giveBookByName("Машина времени");
+console.log("Количество книг после выдачи: " + library1.books.length); 
 
 
 
@@ -158,69 +157,69 @@ console.log("Количество книг после выдачи: " + library.
 //Задача №3. Журнал успеваемости
 
 class Student {
-    constructor (name, gender = 'male', age = 18) {
-      this.name = name;
-      this.gender = gender;
-      this.age = age; 
-      this.marks = {};
-    }
-  
-    getName() {
-      return this.name;
-    }
-  
-    addGrade(mark, subject)  {
-      
-      if(!this.marks[subject]) {
-        this.marks[subject] = [];
-      }  
-      if (mark >= 1 && mark <= 5) {
-        this.marks[subject].push(mark);
-      }  
-      else {
-        console.log('Ошибка, оценка должна быть числом от 1 до 5');
-      }
-    }
-  
-  
-    getAverage()  {
-      let sum = 0;
-      let total = 0;
-  
-      for (const key in this.marks) {
-        sum = sum + this.getAverageBySubject(key);  
-        total++;
-      }
-      return Number((sum / total).toFixed(1));
-    }
-  
-    getAverageBySubject(subject) {
-      if(this.marks[subject]) {
-        let summa = 0;
-        this.marks[subject].forEach(element => summa += element);
-        return summa / this.marks[subject].length
-      }
-      else {
-        console.log(`Предмет не найден: ${subject}`);
-      }
-    }
-    
-    exclude(reason) {
-      delete this.subject;
-      delete this.marks;
-      this.excluded = reason;
-    }
-  
+  constructor (name, gender = 'male', age = 18) {
+    this.name = name;
+    this.gender = gender;
+    this.age = age; 
+    this.mark = {};
   }
+
+  getName() {
+    return this.name;
+  }
+
+  addGrade(mark, subject)  {
+    
+    if(!this.mark[subject]) {
+      this.mark[subject] = [];
+    }  
+    if (mark >= 1 && mark <= 5) {
+      this.mark[subject].push(mark);
+    }  
+    else {
+      console.log('Ошибка, оценка должна быть числом от 1 до 5');
+    }
+  }
+  getAverageBySubject(subject) {
+    if (this.mark[subject]) {
+      let summa = 0;
+      this.mark[subject].forEach(element => summa += element);
+      return summa / this.mark[subject].length ;
+    }
+
+    else {
+       console.log(`Несуществующий предмет: ${subject}`);
+    }
+  }
+
+  getAverage()  {
+    let sum = 0;
+    let total = 0;
+
+    for (const key in this.mark) {
+      sum = sum + this.getAverageBySubject(key);  
+      total++;
+    }
+    console.log ("Средний балл по всем предметам", Number((sum / total).toFixed(2)));
+  }
+
+ 
   
-  const studentLog = new Student('Олег Никифоров');
-  studentLog.addGrade(5, 'algebra');
-  studentLog.addGrade(5, 'algebra');
-  studentLog.addGrade(5, 'geometry');
-  studentLog.addGrade(4, 'geometry');
-  studentLog.addGrade(6, 'geometry'); // "Ошибка, оценка должна быть числом от 1 до 5"
-  studentLog.getAverageBySubject('algebra'); // Средний балл по предмету algebra 5
-  studentLog.getAverageBySubject('geometry'); // Средний балл по предмету geometry 4.5
-  studentLog.getAverageBySubject('biology'); // Несуществующий предмет
-  studentLog.getAverage(); // Средний балл по всем предметам 4.75
-  studentLog.exclude('Исключен за попытку подделать оценки');
+  exclude(reason) {
+    delete this.subject;
+    delete this.mark;
+    this.excluded = reason;
+  }
+}
+
+const studentLog = new Student('Олег Никифоров');
+studentLog.addGrade(5, 'algebra');
+studentLog.addGrade(5, 'algebra');
+studentLog.addGrade(5, 'geometry');
+studentLog.addGrade(4, 'geometry');
+studentLog.addGrade(6, 'geometry'); // "Ошибка, оценка должна быть числом от 1 до 5"
+studentLog.getAverageBySubject('algebra'); // Средний балл по предмету algebra 5
+studentLog.getAverageBySubject('geometry'); // Средний балл по предмету geometry 4.5
+studentLog.getAverageBySubject('biology'); // Несуществующий предмет
+studentLog.getAverage(); // Средний балл по всем предметам 4.75
+studentLog.exclude('Исключен за попытку подделать оценки');
