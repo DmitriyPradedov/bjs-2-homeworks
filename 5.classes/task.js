@@ -115,8 +115,8 @@ class Library {
   giveBookByName(bookName) {
     let position;
 
-    let result = this.books.find(function(item, index) { 
-      position = index;
+    let result = this.books.find(function(item, findIndex) { 
+      position = findIndex;
       return item.name === bookName;
     });
 
@@ -157,71 +157,70 @@ console.log("Количество книг после выдачи: " + library.
 
 //Задача №3. Журнал успеваемости
 
-
 class Student {
-  constructor (name, gender = 'male', age = 18) {
-    this.name = name;
-    this.gender = gender;
-    this.age = age; 
-    this.marks = {};
-  }
-
-  getName() {
-    return this.name;
-  }
-
-  addGrade(mark, subject)  {
+    constructor (name, gender = 'male', age = 18) {
+      this.name = name;
+      this.gender = gender;
+      this.age = age; 
+      this.marks = {};
+    }
+  
+    getName() {
+      return this.name;
+    }
+  
+    addGrade(mark, subject)  {
+      
+      if(!this.marks[subject]) {
+        this.marks[subject] = [];
+      }  
+      if (mark >= 1 && mark <= 5) {
+        this.marks[subject].push(mark);
+      }  
+      else {
+        console.log('Ошибка, оценка должна быть числом от 1 до 5');
+      }
+    }
+  
+  
+    getAverage()  {
+      let sum = 0;
+      let total = 0;
+  
+      for (const key in this.marks) {
+        sum = sum + this.getAverageBySubject(key);  
+        total++;
+      }
+      return Number((sum / total).toFixed(1));
+    }
+  
+    getAverageBySubject(subject) {
+      if(this.marks[subject]) {
+        let summa = 0;
+        this.marks[subject].forEach(element => summa += element);
+        return summa / this.marks[subject].length
+      }
+      else {
+        console.log(`Предмет не найден: ${subject}`);
+      }
+    }
     
-    if(!this.marks[subject]) {
-      this.marks[subject] = [];
-    }  
-    if (mark >= 1 && mark <= 5) {
-      this.marks[subject].push(mark);
-    }  
-    else {
-      console.log('Ошибка, оценка должна быть числом от 1 до 5');
+    exclude(reason) {
+      delete this.subject;
+      delete this.marks;
+      this.excluded = reason;
     }
-  }
-
-
-  getAverage()  {
-    let sum = 0;
-    let total = 0;
-
-    for (const key in this.marks) {
-      sum = sum + this.getAverageBySubject(key);  
-      total++;
-    }
-    return Number((sum / total).toFixed(1));
-  }
-
-  getAverageBySubject(subject) {
-    if(this.marks[subject]) {
-      let summa = 0;
-      this.marks[subject].forEach(element => summa += element);
-      return summa / this.marks[subject].length
-    }
-    else {
-      console.log(`Предмет не найден: ${subject}`);
-    }
+  
   }
   
-  exclude(reason) {
-    delete this.subject;
-    delete this.marks;
-    this.excluded = reason;
-  }
-
-}
-
-const studentLog = new Student('Олег Никифоров');
-studentLog.addGrade(5, 'algebra');
-studentLog.addGrade(5, 'algebra');
-studentLog.addGrade(5, 'geometry');
-studentLog.addGrade(4, 'geometry');
-studentLog.addGrade(6, 'geometry'); // "Ошибка, оценка должна быть числом от 1 до 5"
-studentLog.getAverageBySubject('algebra'); // Средний балл по предмету algebra 5
-studentLog.getAverageBySubject('geometry'); // Средний балл по предмету geometry 4.5
-studentLog.getAverageBySubject('biology'); // Несуществующий предмет
-studentLog.getAverage(); // Средний балл по всем предметам 4.75
-studentLog.exclude('Исключен за попытку подделать оценки');
+  const studentLog = new Student('Олег Никифоров');
+  studentLog.addGrade(5, 'algebra');
+  studentLog.addGrade(5, 'algebra');
+  studentLog.addGrade(5, 'geometry');
+  studentLog.addGrade(4, 'geometry');
+  studentLog.addGrade(6, 'geometry'); // "Ошибка, оценка должна быть числом от 1 до 5"
+  studentLog.getAverageBySubject('algebra'); // Средний балл по предмету algebra 5
+  studentLog.getAverageBySubject('geometry'); // Средний балл по предмету geometry 4.5
+  studentLog.getAverageBySubject('biology'); // Несуществующий предмет
+  studentLog.getAverage(); // Средний балл по всем предметам 4.75
+  studentLog.exclude('Исключен за попытку подделать оценки');
